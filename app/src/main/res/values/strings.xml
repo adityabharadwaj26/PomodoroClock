@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Pomodoro Clock</string>
+    <string name="action_settings">Settings</string>
+    <string name="Start">Start</string>
+    <string name="Pause">Pause</string>
+    <string name="Reset">Reset</string>
+    <string name="Stop">Stop</string>
+    <string name="pomodoro">Pomodoro</string>
+    <string name="banner_ad_unit_id">ca-app-pub-2071539911441808/9970831179</string>
+    <string name="timerVal">0:00:000</string>
+    <string name="title_activity_main">MainActivity</string>
+</resources>
