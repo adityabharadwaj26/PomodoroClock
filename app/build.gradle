@@ -8,8 +8,8 @@ android {
         applicationId "in.blogspot.understandingthecode.pomodoroclock"
         minSdkVersion 16
         targetSdkVersion 23
-        versionName '2.0'
-        versionCode 2
+        versionName '2.1'
+        versionCode 3
     }
     buildTypes {
         release {

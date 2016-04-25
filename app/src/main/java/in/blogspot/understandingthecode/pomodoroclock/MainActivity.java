@@ -1,10 +1,12 @@
 package in.blogspot.understandingthecode.pomodoroclock;
 
+import android.content.Context;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.PowerManager;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -25,12 +27,12 @@ public class MainActivity extends AppCompatActivity {
     int maxTime = 1200000;
     boolean pause = false;
     boolean maxTimeset = false;
-    Toolbar mActionBarToolbar;
     private ProgressBar progress;
     private TextView timerValue;
     private long startTime = 0L;
     private Handler customHandler = new Handler();
     private Ringtone ring;
+
     private Runnable updateTimerThread = new Runnable() {
         @Override
         public void run() {
@@ -50,27 +52,28 @@ public class MainActivity extends AppCompatActivity {
             if (updatedTime == maxTime) {
                 maxTimeset = true;
                 playTimer();
-                //stopTimer();
             }
         }
     };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        //final CountDown timer = new CountDown();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /*mActionBarToolbar = (Toolbar) findViewById(R.id.toolbar);
-        mActionBarToolbar.setTitle("Pomodoro");
-        setSupportActionBar(mActionBarToolbar);
-*/
+        PowerManager mgr = (PowerManager)this.getSystemService(Context.POWER_SERVICE);
+        PowerManager.WakeLock wakeLock = mgr.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "MyWakeLock");
+        wakeLock.acquire();
+
         AdView mAdView = (AdView) findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+        if (mAdView != null) {
+            mAdView.loadAd(adRequest);
+        }
 
         timerValue = (TextView) findViewById(R.id.timerVal);
         final Button startButton = (Button) findViewById(R.id.startButton);
+        assert startButton != null;
         startButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 if (!pause) {
@@ -91,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         Button resetButton = (Button) findViewById(R.id.resetButton);
+        assert resetButton != null;
         resetButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 timeInMilliseconds = 0L;
@@ -139,5 +143,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onStop() {
         super.onStop();
+    }
+    public void onDestroy() {
+        super.onDestroy();
     }
 }
