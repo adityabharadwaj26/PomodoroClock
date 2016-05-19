@@ -1,6 +1,8 @@
 package in.blogspot.understandingthecode.pomodoroclock;
 
+//Imports
 import android.content.Context;
+import android.content.Intent;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -10,17 +12,19 @@ import android.os.PowerManager;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
 public class MainActivity extends AppCompatActivity {
 
+    //Variable Declarations
     long timeInMilliseconds = 0L;
     long timeSwapBuff = 0L;
     long updatedTime = 0L;
@@ -33,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private Handler customHandler = new Handler();
     private Ringtone ring;
 
+    //Runnable Thread
     private Runnable updateTimerThread = new Runnable() {
         @Override
         public void run() {
@@ -43,9 +48,8 @@ public class MainActivity extends AppCompatActivity {
             int mins = secs / 60;
             secs = secs % 60;
             int milliseconds = (int) (updatedTime % 1000);
-            timerValue.setText("" + mins + ":"
-                    + String.format("%02d", secs) + ":"
-                    + String.format("%03d", milliseconds));
+            String timer = ("" + String.format("%02d",mins) + ":" + String.format("%02d", secs));
+            timerValue.setText(timer) ;
             progress.setMax(maxTime);
             progress.setProgress((int) updatedTime);
             customHandler.postDelayed(this, 0);
@@ -56,10 +60,14 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    //onCreate Method
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Intent intent =new Intent(this,Intro.class);
+        startActivity(intent);
 
         PowerManager mgr = (PowerManager)this.getSystemService(Context.POWER_SERVICE);
         PowerManager.WakeLock wakeLock = mgr.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "MyWakeLock");
@@ -104,9 +112,8 @@ public class MainActivity extends AppCompatActivity {
                 int mins = secs / 60;
                 secs = secs % 60;
                 int milliseconds = (int) (updatedTime % 1000);
-                timerValue.setText(mins + ":"
-                        + String.format("%02d", secs) + ":"
-                        + String.format("%03d", milliseconds));
+                String timer1 = ("" + String.format("%02d",mins) + ":" + String.format("%02d", secs));
+                timerValue.setText(timer1);
                 progress.setProgress((int) updatedTime);
                 startButton.setText(R.string.Start);
                 pause = false;
@@ -121,6 +128,7 @@ public class MainActivity extends AppCompatActivity {
         progress = (ProgressBar) findViewById(R.id.progressBar);
     }
 
+    //Play Timer method
     public void playTimer() {
         Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
         ring = RingtoneManager.getRingtone(getApplicationContext(), notification);
@@ -131,6 +139,29 @@ public class MainActivity extends AppCompatActivity {
                 Toast.LENGTH_LONG).show();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);//Menu Resource, Menu
+        return true;
+    }
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.item1:
+                Intent intent = new Intent(MainActivity.this, About_Me.class);
+                MainActivity.this.startActivity(intent);
+                //Toast.makeText(getApplicationContext(),"Item 1 Selected",Toast.LENGTH_LONG).show();
+                return true;
+            /*case R.id.item2:
+                Toast.makeText(getApplicationContext(),"Item 2 Selected",Toast.LENGTH_LONG).show();
+                return true;
+            case R.id.item3:
+                Toast.makeText(getApplicationContext(),"Item 3 Selected",Toast.LENGTH_LONG).show();
+                return true;*/
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
     public void stopTimer() {
         ring.stop();
     }

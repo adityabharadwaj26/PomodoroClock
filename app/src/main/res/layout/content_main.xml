@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,60 +7,79 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="in.blogspot.understandingthecode.myapplication.MainActivity"
+    tools:context="in.blogspot.understandingthecode.pomodoroclock.MainActivity"
     tools:showIn="@layout/activity_main"
     android:gravity="center_horizontal"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
-    >
+    android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="40sp"
-        android:text="@string/timerVal"
-        android:id="@+id/timerVal"
-        android:layout_marginTop="129dp"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/startButton"
-        android:layout_toEndOf="@+id/startButton" />
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/Start"
-        android:id="@+id/startButton"
-        android:gravity="fill_vertical|center_horizontal"
-        android:layout_below="@+id/timerVal"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/Reset"
-        android:id="@+id/resetButton"
-        android:gravity="fill_vertical|center_horizontal"
-        android:layout_below="@+id/timerVal"
-        android:layout_toRightOf="@+id/timerVal"
-        android:layout_toEndOf="@+id/timerVal" />
     <ProgressBar
         style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         android:id="@+id/progressBar"
-        android:layout_alignParentTop="true"
-        android:layout_alignLeft="@+id/startButton"
-        android:layout_alignStart="@+id/startButton"
-        android:layout_marginTop="75dp"
-        android:layout_alignRight="@+id/resetButton"
-        android:layout_alignEnd="@+id/resetButton" />
+        android:padding="5dp"
+        android:layout_weight="1"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textAlignment="center"
+        android:layout_weight="1"
+        android:textSize="40sp"
+        android:text="@string/timerVal"
+        android:id="@+id/timerVal">
+    </TextView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textAlignment="center"
+        android:layout_weight="1"
+        android:text="@string/label"
+        android:id="@+id/label">
+    </TextView>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight="1"
+        android:padding="5dp">
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Start"
+        android:layout_weight="1"
+        android:id="@+id/startButton"
+        android:padding="5dp"
+         />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Reset"
+        android:layout_weight="1"
+        android:id="@+id/resetButton"
+        android:padding="5dp"
+         />
+    </LinearLayout>
+
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
+        android:layout_weight="1"
         ads:adSize="BANNER"
         ads:adUnitId="@string/banner_ad_unit_id">
     </com.google.android.gms.ads.AdView>
 
-</RelativeLayout>
+</LinearLayout>
