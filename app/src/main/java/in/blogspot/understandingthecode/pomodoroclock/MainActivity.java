@@ -3,6 +3,7 @@ package in.blogspot.understandingthecode.pomodoroclock;
 //Imports
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -60,15 +61,25 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+
     //onCreate Method
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent intent =new Intent(this,Intro.class);
-        startActivity(intent);
+        SharedPreferences sharedpreferences = getPreferences(MODE_PRIVATE);
+        //boolean NoShow = sharedpreferences.getBoolean("NoShow",false);
 
+        boolean userFirstLogin = sharedpreferences.getBoolean("NoShow", true);
+
+        if (userFirstLogin) {
+            Intent intent = new Intent(this, Intro.class);
+            startActivity(intent);
+            sharedpreferences.edit().putBoolean("NoShow", true).commit();
+            //editor.putBoolean("NoShow", true);
+            //editor.apply();
+        }
         PowerManager mgr = (PowerManager)this.getSystemService(Context.POWER_SERVICE);
         PowerManager.WakeLock wakeLock = mgr.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "MyWakeLock");
         wakeLock.acquire();

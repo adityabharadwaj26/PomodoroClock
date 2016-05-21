@@ -36,7 +36,7 @@
             android:theme="@style/AppTheme"
             />
         <activity android:name=".Intro"
-            android:theme="@style/Transparent">
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

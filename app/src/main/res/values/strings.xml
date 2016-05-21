@@ -23,6 +23,8 @@
         <a href="https://github.com/adityabharadwaj26"> GitHub </a>
     </string>
     <string name="label">MM:SS</string>
+    <string name="IntroQuestion">What Is Pomodoro Technique?</string>
+    <string name="Dismiss">Dismiss</string>
     <string name="title_activity_fullscreen">FullscreenActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
