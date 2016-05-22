@@ -70,13 +70,13 @@ public class MainActivity extends AppCompatActivity {
 
         SharedPreferences sharedpreferences = getPreferences(MODE_PRIVATE);
         //boolean NoShow = sharedpreferences.getBoolean("NoShow",false);
-
+        //boolean userFirstLogin = true;
         boolean userFirstLogin = sharedpreferences.getBoolean("NoShow", true);
 
         if (userFirstLogin) {
             Intent intent = new Intent(this, Intro.class);
             startActivity(intent);
-            sharedpreferences.edit().putBoolean("NoShow", true).commit();
+            sharedpreferences.edit().putBoolean("NoShow", false).apply();
             //editor.putBoolean("NoShow", true);
             //editor.apply();
         }
@@ -163,12 +163,6 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.this.startActivity(intent);
                 //Toast.makeText(getApplicationContext(),"Item 1 Selected",Toast.LENGTH_LONG).show();
                 return true;
-            /*case R.id.item2:
-                Toast.makeText(getApplicationContext(),"Item 2 Selected",Toast.LENGTH_LONG).show();
-                return true;
-            case R.id.item3:
-                Toast.makeText(getApplicationContext(),"Item 3 Selected",Toast.LENGTH_LONG).show();
-                return true;*/
             default:
                 return super.onOptionsItemSelected(item);
         }
