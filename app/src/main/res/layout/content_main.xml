@@ -22,33 +22,14 @@
         android:padding="5dp"
         android:layout_weight="1"
         />
-    <LinearLayout
-        android:layout_width="match_parent"
+    <Chronometer
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textAlignment="center"
-        android:layout_weight="1"
+        android:layout_gravity="center"
         android:textSize="40sp"
-        android:text="@string/timerVal"
-        android:id="@+id/timerVal">
-    </TextView>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textAlignment="center"
-        android:layout_weight="1"
-        android:text="@string/label"
-        android:id="@+id/label">
-    </TextView>
-    </LinearLayout>
+        android:format="%s"
+        android:id="@+id/chronometer"
+        />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -81,5 +62,7 @@
         ads:adSize="BANNER"
         ads:adUnitId="@string/banner_ad_unit_id">
     </com.google.android.gms.ads.AdView>
+
+
 
 </LinearLayout>
